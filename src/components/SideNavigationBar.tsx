@@ -11,40 +11,38 @@ const SideNavigationBar = () => {
 		<Grid
 			item
 			style={{
-				position: "fixed",
-				paddingLeft: "20px",
+				paddingLeft: " 10px",
 			}}>
-			<Toolbar>
-				<Link to="/">
-					<Typography fontSize={"large"}> Home</Typography>
-				</Link>
-			</Toolbar>
-
-			<Toolbar>
-				<Link to="movies">
-					<Typography fontSize={"large"}> Movies</Typography>
-				</Link>
-			</Toolbar>
-			<Toolbar>
-				<Link to="mylikes">
-					<Typography fontSize={"large"}> Liked movies</Typography>
-				</Link>
-				{dataContext?.likedList?.length ? (
-					<Badge badgeContent={dataContext?.likedList?.length} color="primary">
-						<Favorite
-							style={{ fill: "red", paddingLeft: "5px" }}
-							fontSize="small"
-						/>
-					</Badge>
-				) : (
-					<Badge badgeContent={dataContext?.likedList?.length} color="primary">
-						<Favorite
-							style={{ fill: "gray", paddingLeft: "5px" }}
-							fontSize="small"
-						/>
-					</Badge>
-				)}
-			</Toolbar>
+			<Link
+				style={{
+					padding: "0 8px",
+				}}
+				to="/">
+				Home
+			</Link>
+			<Link
+				style={{
+					padding: "0 10px",
+				}}
+				to="movies">
+				Movies
+			</Link>
+			<Link to="mylikes">Liked movies</Link>
+			{dataContext?.likedList?.length ? (
+				<Badge badgeContent={dataContext?.likedList?.length} color="primary">
+					<Favorite
+						style={{ fill: "red", paddingLeft: "5px" }}
+						fontSize="small"
+					/>
+				</Badge>
+			) : (
+				<Badge badgeContent={dataContext?.likedList?.length} color="primary">
+					<Favorite
+						style={{ fill: "gray", paddingLeft: "5px" }}
+						fontSize="small"
+					/>
+				</Badge>
+			)}
 		</Grid>
 	);
 };

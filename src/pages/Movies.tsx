@@ -9,30 +9,37 @@ const Movies = () => {
 	const pages = [1, 2, 3, 4, 5];
 	const dataContext = React.useContext(DataContext);
 
-	const getMovies = async () => {
-		const response = await fetchMovies(currentPage);
+	// const getMovies = async () => {
+	// 	const response = await fetchMovies(currentPage);
 
-		const modifiedMovies = response?.results.map((moviePop: movieType) => {
-			return { ...moviePop, liked: false, editMode: false, writeComment: "" };
-		});
-		console.log(
-			"modifiedMovies när körs denna? blir like false?",
-			modifiedMovies
-		);
+	// 	const modifiedMovies = response?.results.map((moviePop: movieType) => {
+	// 		return { ...moviePop, liked: false, editMode: false, writeComment: "" };
+	// 	});
+	// 	console.log(
+	// 		"modifiedMovies när körs denna? blir like false?",
+	// 		modifiedMovies
+	// 	);
 
-		dataContext.setMovies([...modifiedMovies]);
-	};
+	// 	dataContext.setMovies([...modifiedMovies]);
+	// };
 
 	React.useEffect(() => {
-		getMovies();
+		console.log("do u see movies", dataContext.movies);
+
+		// getMovies();
 	}, [currentPage]);
 
 	return (
 		<Grid container spacing={3} item xs={12}>
 			<Typography variant="h3" gutterBottom>
-				Backend filtering
+				{/* Backend filtering */}
 			</Typography>
-			<Grid xs={12} sm={12} container flexWrap="nowrap">
+			<Grid
+				xs={12}
+				sm={12}
+				container
+				flexWrap="nowrap"
+				style={{ marginTop: "60px" }}>
 				{pages.map((page) => (
 					<Grid key={page} justifyContent="center">
 						<Button variant="outlined" onClick={() => setCurrentPage(page)}>

@@ -10,11 +10,28 @@ import MovieReviews from "./pages/MovieReviews";
 import Movies from "./pages/Movies";
 import MyLikes from "./pages/MyLikes";
 import { movieType } from "./types";
+import "./App.css";
+import { fetchMovies } from "./api/fetchData";
 
 const App = () => {
 	const [movies, setMovies] = React.useState<movieType[]>([]);
 	const [likedList, setLikedList] = React.useState<movieType[]>([]);
+	const [currentPage, setCurrentPage] = React.useState(1);
+	const pages = [1, 2, 3, 4, 5];
+	const dataContext = React.useContext(DataContext);
 
+	const getMovies = async () => {
+		const response = await fetchMovies(currentPage);
+
+		const modifiedMovies = response?.results.map((moviePop: movieType) => {
+			return { ...moviePop, liked: false, editMode: false, writeComment: "" };
+		});
+
+		dataContext.setMovies([...modifiedMovies]);
+	};
+	React.useEffect(() => {
+		getMovies();
+	}, [currentPage]);
 	const likeMovies = (chosenMovie: movieType) => {
 		const returnValue = handleLikePropety(movies, chosenMovie);
 		console.log("returnValue", returnValue);
@@ -74,7 +91,7 @@ const App = () => {
 				}}>
 				<BrowserRouter>
 					<Grid container>
-						<Grid item xs={2} paddingTop={4}>
+						<Grid item xs={12} paddingTop={4}>
 							<SideNavigationBar />
 						</Grid>
 						<Grid item xs={9} paddingTop={5}>
